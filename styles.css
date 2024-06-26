@@ -1,0 +1,160 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <script src="./js/header.js"></script>
+    <title>Home Page</title>
+    <style>
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        .heading {
+            text-align: center;
+            color: #333;
+        }
+
+        .center {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .center a {
+            float: left;
+            display: block;
+            color: lightgray;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .center a:hover {
+            background-color: #555;
+            color: black;
+        }
+
+        .center a.active {
+            background-color: black;
+            color: white;
+        }
+
+        .center .icon {
+            display: none;
+        }
+
+        .content {
+            background-color: #fff;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 20px;
+            background-image: url("background4.jpg");
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin: 20px 0;
+            height: auto;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .center a {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .icon {
+                display: inline-block;
+            }
+        }
+
+        @media screen and (max-width: 950px) {
+            .center a:not(:first-child) {
+                display: none;
+            }
+
+            .center a.icon {
+                float: right;
+                display: block;
+            }
+        }
+
+        @media screen and (max-width: 950px) {
+            .center.responsive {
+                position: relative;
+            }
+
+            .center.responsive .icon {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+            .center.responsive a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="img/usc_bg.jpg" alt="USF_LOGO" height="60" width="100" />
+        <h2 class="heading">Ultimate Sports Cars</h2>
+    </div>
+
+    <div class="center container-fluid navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" id="myCenter">
+        <a href="index.html" class="active"> Home </a>
+        <a href="TPP.html"> Top Performance Picks </a>
+        <a href="CS.html"> Customization Studio </a>
+        <a href="visualization.html"> Visualization </a>
+        <a href="About.html"> About Me </a>
+        <a href="AddData.html"> New Data Form </a>
+        <a href="AddRecord.html"> Inquiry Form </a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+    <div class="container">
+        <div class="content">
+            <p>
+                Welcome to Ultimate Sports Cars, where passion meets performance. For over a decade, we have been at the forefront of the sports car industry, crafting masterpieces that redefine the driving experience. Our commitment to excellence is reflected in every detail of our vehicles, from the sleek aerodynamic designs to the powerful engines that roar with unparalleled vigor.
+            </p>
+            <p>
+                At Ultimate Sports Cars, we understand that a car is more than just a mode of transportation; it is a statement of style, a testament to engineering prowess, and an embodiment of freedom. Each model in our lineup is meticulously designed to offer a symphony of speed, control, and luxury, ensuring that every drive is an exhilarating journey.
+            </p>
+            <p>
+                Our dedication to innovation is unwavering. We integrate cutting-edge technology with timeless craftsmanship, creating sports cars that are not only visually stunning but also equipped with the latest advancements in automotive engineering. From state-of-the-art infotainment systems to advanced safety features, our vehicles are built to provide an unmatched driving experience.
+            </p>
+            <p>
+                Explore our range of high-performance sports cars and discover the perfect blend of aesthetics and performance. Whether you are drawn to the classic elegance of our heritage models or the futuristic appeal of our latest creations, Ultimate Sports Cars promises to ignite your passion for driving. Join us on this journey and experience the thrill of the open road like never before.
+            </p>
+        </div>
+    </div>
+    <div class="center" id="myCenter" style="display:flex;justify-content: space-around;">
+        <a>&copy; 2024 - Ultimate Sports Cars</a>
+    </div>
+</body>
+</html>

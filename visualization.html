@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="css/SIMStyles.css">
+    <link rel="stylesheet" type="text/css" href="css/About.css">
+    <script src="./js/header.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <title>Ultimate Sports Cars Data Visualization</title>
+    
+    <style>
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .chart-container > div {
+            margin: 20px;
+            width: 800px;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="img/usc_bg.jpg" alt="USF_LOGO" height="60" width="100" />
+
+        <h2 class="heading">
+            Ultimate Sports Cars
+        </h2>
+    </div>
+    <p>
+        <div class="center" id="myCenter" style="font-family:sans-serif; align-content:center">
+            <a href="index.html"> Home </a>
+            <a href="BasicRequirement.html"> Top Performance Picks </a>
+            <a href="labourCondition.html"> Customization Studio </a>
+            <a href="h1b-visualization.html">Visualization</a>
+            <a href="About.html"> About Me </a>
+            <a href="AddData.html">  New Data Form </a>
+            <a href="AddRecord.html"> Inquiry Form </a>    
+          
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </p>
+
+    <div class="container">
+        <h1 id="main-heading">Ultimate Sports Cars Data Visualization</h1>
+
+        <style>
+            #main-heading {
+                text-align: center;
+            }
+        </style>
+        <div class="chart-container">
+            <div>
+                <h2>Trends in Horsepower Over Years</h2>
+                <canvas id="trendsChart"></canvas>
+            </div>
+            <div>
+                <h2>Top 5 Car Makes by Average Price</h2>
+                <canvas id="carMakesChart"></canvas>
+            </div>
+            <div>
+                <h2>Distribution of Engine Sizes</h2>
+                <canvas id="engineSizesChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="center" id="myCenter" style="display:flex;justify-content: space-around;">
+        <a>copyrights@2024</a>
+    </div>
+    <script>
+        // Expanded dataset with more realistic values
+        const data = [
+            { 'Year': 2020, 'Car Make': 'Ferrari', 'Price (in USD)': 301000, 'Engine Size (L)': 3.9, 'Horsepower': 710, 'Torque (lb-ft)': 568, '0-60 MPH Time (seconds)': 2.9 },
+            { 'Year': 2021, 'Car Make': 'Lamborghini', 'Price (in USD)': 331000, 'Engine Size (L)': 5.2, 'Horsepower': 631, 'Torque (lb-ft)': 443, '0-60 MPH Time (seconds)': 2.9 },
+            { 'Year': 2019, 'Car Make': 'Porsche', 'Price (in USD)': 114000, 'Engine Size (L)': 3.0, 'Horsepower': 443, 'Torque (lb-ft)': 390, '0-60 MPH Time (seconds)': 3.2 },
+            { 'Year': 2018, 'Car Make': 'McLaren', 'Price (in USD)': 285000, 'Engine Size (L)': 4.0, 'Horsepower': 710, 'Torque (lb-ft)': 568, '0-60 MPH Time (seconds)': 2.7 },
+            { 'Year': 2022, 'Car Make': 'Bugatti', 'Price (in USD)': 3000000, 'Engine Size (L)': 8.0, 'Horsepower': 1500, 'Torque (lb-ft)': 1180, '0-60 MPH Time (seconds)': 2.4 },
+            { 'Year': 2021, 'Car Make': 'Aston Martin', 'Price (in USD)': 150000, 'Engine Size (L)': 4.0, 'Horsepower': 503, 'Torque (lb-ft)': 505, '0-60 MPH Time (seconds)': 3.6 },
+            { 'Year': 2020, 'Car Make': 'Audi', 'Price (in USD)': 170000, 'Engine Size (L)': 5.2, 'Horsepower': 602, 'Torque (lb-ft)': 413, '0-60 MPH Time (seconds)': 3.2 },
+            { 'Year': 2022, 'Car Make': 'Mercedes-AMG', 'Price (in USD)': 157500, 'Engine Size (L)': 4.0, 'Horsepower': 577, 'Torque (lb-ft)': 516, '0-60 MPH Time (seconds)': 3.3 },
+            { 'Year': 2021, 'Car Make': 'BMW', 'Price (in USD)': 135000, 'Engine Size (L)': 3.0, 'Horsepower': 503, 'Torque (lb-ft)': 479, '0-60 MPH Time (seconds)': 3.2 },
+            { 'Year': 2019, 'Car Make': 'Nissan', 'Price (in USD)': 113540, 'Engine Size (L)': 3.8, 'Horsepower': 565, 'Torque (lb-ft)': 467, '0-60 MPH Time (seconds)': 2.9 },
+        ];
+
+        // Data for the Trends Chart
+        let years = [...new Set(data.map(row => row['Year']))].sort();
+        let hpData = {};
+        data.forEach(row => {
+            hpData[row['Year']] = (hpData[row['Year']] || 0) + row['Horsepower'];
+        });
+        let trendsData = {
+            labels: years,
+            datasets: [
+                {
+                    label: 'Total Horsepower',
+                    data: years.map(year => hpData[year]),
+                    borderColor: '#4CAF50',
+                    fill: false
+                }
+            ]
+        };
+        new Chart(document.getElementById('trendsChart').getContext('2d'), {
+            type: 'line',
+            data: trendsData,
+            options: {
+                maintainAspectRatio: true,
+                title: {
+                    display: true,
+                    fontStyle: 'bold',
+                    fontSize: 18
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            callback: function(value, index, values) {
+                                return value.toLocaleString();
+                            }
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            callback: function(value, index, values) {
+                                return value; // Return the full year value
+                            }
+                        }
+                    }]
+                }
+            }
+        });
+
+        // Data for the Car Makes Chart
+        let carMakePrices = {};
+        data.forEach(row => {
+            if (!carMakePrices[row['Car Make']]) {
+                carMakePrices[row['Car Make']] = { total: 0, count: 0 };
+            }
+            carMakePrices[row['Car Make']].total += row['Price (in USD)'];
+            carMakePrices[row['Car Make']].count += 1;
+        });
+        let carMakes = Object.keys(carMakePrices).sort((a, b) => (carMakePrices[b].total / carMakePrices[b].count) - (carMakePrices[a].total / carMakePrices[a].count)).slice(0, 5);
+        let carMakesData = {
+            labels: carMakes,
+            datasets: [{
+                label: 'Average Price (in USD)',
+                data: carMakes.map(make => (carMakePrices[make].total / carMakePrices[make].count)),
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#9B59B6', '#E7E9ED']
+            }]
+        };
+        new Chart(document.getElementById('carMakesChart').getContext('2d'), {
+            type: 'bar',
+            data: carMakesData,
+            options: {
+                title: {
+                    display: true,
+                    fontStyle: 'bold',
+                    fontSize: 18
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            callback: function(value, index, values) {
+                                return '$' + value.toLocaleString();
+                            }
+                        }
+                    }]
+                }
+            }
+        });
+
+        // Improved Engine Sizes Chart
+        let engineSizeCounts = {};
+        data.forEach(row => {
+            const key = `${row['Engine Size (L)']}L - ${row['Car Make']}`;
+            engineSizeCounts[key] = (engineSizeCounts[key] || 0) + 1;
+        });
+
+        let engineSizesData = {
+            labels: Object.keys(engineSizeCounts),
+            datasets: [{
+                data: Object.values(engineSizeCounts),
+                backgroundColor: [
+                    '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
+                    '#FF9F40', '#FF6384', '#C9CBCF', '#4BC0C0', '#FF9F40'
+                ]
+            }]
+        };
+
+        new Chart(document.getElementById('engineSizesChart').getContext('2d'), {
+            type: 'pie',
+            data: engineSizesData,
+            options: {
+                title: {
+                    display: true,
+                    text: 'Distribution of Engine Sizes by Brand',
+                    fontStyle: 'bold',
+                    fontSize: 18
+                },
+                legend: {
+                    position: 'right',
+                    labels: {
+                        generateLabels: function(chart) {
+                            const data = chart.data;
+                            if (data.labels.length && data.datasets.length) {
+                                return data.labels.map(function(label, i) {
+                                    const meta = chart.getDatasetMeta(0);
+                                    const ds = data.datasets[0];
+                                    const arc = meta.data[i];
+                                    const custom = arc && arc.custom || {};
+                                    const getValueAtIndexOrDefault = Chart.helpers.getValueAtIndexOrDefault;
+                                    const arcOpts = chart.options.elements.arc;
+                                    const fill = custom.backgroundColor ? custom.backgroundColor : getValueAtIndexOrDefault(ds.backgroundColor, i, arcOpts.backgroundColor);
+                                    const stroke = custom.borderColor ? custom.borderColor : getValueAtIndexOrDefault(ds.borderColor, i, arcOpts.borderColor);
+                                    const bw = custom.borderWidth ? custom.borderWidth : getValueAtIndexOrDefault(ds.borderWidth, i, arcOpts.borderWidth);
+
+                                    const value = chart.config.data.datasets[meta.index].data[i];
+                                    
+                                    return {
+                                        text: label + ': ' + value,
+                                        fillStyle: fill,
+                                        strokeStyle: stroke,
+                                        lineWidth: bw,
+                                        hidden: isNaN(ds.data[i]) || meta.data[i].hidden,
+                                        index: i
+                                    };
+                                });
+                            }
+                            return [];
+                        }
+                    }
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            const dataset = data.datasets[tooltipItem.datasetIndex];
+                            const total = dataset.data.reduce((previousValue, currentValue) => previousValue + currentValue);
+                            const currentValue = dataset.data[tooltipItem.index];
+                            const percentage = Math.floor(((currentValue/total) * 100)+0.5);
+                            return data.labels[tooltipItem.index] + ': ' + currentValue + ' (' + percentage + '%)';
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    
+}
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.profile img {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+    object-fit: contain; /* Ensure the whole image is visible */
+    object-position: center center; /* Center the image */
+    border-radius: 0; /* Ensure sharp edges */
+}
+
+
+
+    .profile h2 {
+        text-align: center;
+        margin-top: 20px;
+        color: #333;
+    }
+
+    .profile p {
+        text-align: justify;
+        margin: 10px 0;
+        color: #666;
+    }
+
+.container h1, .container h2 {
+    color: #333;
+}
